@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdCasa Indica | Ofertas e Achados</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --bg: #f3f4f6;
+            --text: #1f2937;
+            --card-bg: #ffffff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); }
+        
+        /* Header & Search */
+        header { background-color: var(--card-bg); padding: 30px 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        header h1 { color: var(--primary); font-size: 32px; margin-bottom: 10px; }
+        header p { color: #6b7280; font-size: 16px; margin-bottom: 20px; }
+        
+        .search-container { max-width: 600px; margin: 0 auto; position: relative; }
+        #searchInput { width: 100%; padding: 15px 20px; font-size: 16px; border: 2px solid #e5e7eb; border-radius: 30px; outline: none; transition: border-color 0.3s; }
+        #searchInput:focus { border-color: var(--primary); }
+
+        /* Categorias */
+        .categories { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .filter-btn { padding: 8px 16px; border: none; background-color: #e5e7eb; color: var(--text); border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .filter-btn:hover { background-color: #d1d5db; }
+        .filter-btn.active { background-color: var(--primary); color: white; }
+
+        /* Container de Produtos */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; min-height: 50vh; }
+        .no-results { grid-column: 1 / -1; text-align: center; color: #6b7280; font-size: 18px; padding: 40px; }
+
+        /* Cartão de Produto */
+        .product-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s; display: flex; flex-direction: column; animation: fadeIn 0.4s ease-in-out; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .product-img { width: 100%; height: 200px; background-color: #e5e7eb; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+        .product-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-category { font-size: 12px; font-weight: bold; color: var(--primary); text-transform: uppercase; margin-bottom: 8px; }
+        .product-title { font-size: 18px; font-weight: 600; margin-bottom: 15px; line-height: 1.3; }
+        
+        .stores-container { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+        .btn { text-decoration: none; text-align: center; padding: 12px; border-radius: 8px; font-weight: bold; color: white; transition: opacity 0.2s; font-size: 14px; }
+        .btn:hover { opacity: 0.9; }
+        
+        /* Cores dos Botões das Lojas */
+        .btn-ml { background-color: #FFE600; color: #333; }
+        .btn-amazon { background-color: #FF9900; color: #000; }
+        .btn-magalu { background-color: #0086FF; }
+        .btn-hotmart { background-color: #F04E23; }
+
+        footer { text-align: center; padding: 20px; background-color: var(--card-bg); color: #6b7280; font-size: 14px; border-top: 1px solid #e5e7eb; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🛒 EdCasa Indica</h1>
+        <p>Busque pelos melhores achados e recomendações.</p>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar por ferramenta, tênis, peças, e-books...">
+        </div>
+    </header>
+
+    <div class="categories" id="categoryContainer">
+        <!-- Os botões de categoria serão gerados automaticamente aqui -->
+    </div>
+
+    <div class="container" id="productContainer">
+        <!-- Os produtos aparecerão aqui -->
+    </div>
+
+    <footer>
+        <p>O EdCasa Indica é uma plataforma de recomendações. Comprando pelos links, ganhamos uma comissão sem custo extra para você.</p>
+    </footer>
+
+    <script>
+        // === SUA BASE DE DADOS DE PRODUTOS ===
+        // Para adicionar um novo produto, basta copiar uma linha abaixo e colar no final da lista.
+        const products = [
+            {
+                nome: "Parafusadeira e Furadeira 72V com Maleta",
+                categoria: "Ferramentas",
+                icone: "🛠️",
+                lojas: [
+                    { nome: "Ver no Mercado Livre", link: "#", classe: "btn-ml" },
+                    { nome: "Ver na Amazon", link: "#", classe: "btn-amazon" }
+                ]
+            },
+            {
+                nome: "Extensor de Torneira Giratório 1080º",
+                categoria: "Casa",
+                icone: "🚰",
+                lojas: [
+                    { nome: "Ver na Shopee", link: "#", classe: "btn-hotmart" } // Usando a cor laranja como exemplo
+                ]
+            },
+            {
+                nome: "Kit Central Multimídia MyLink Touch",
+                categoria: "Automotivo",
+                icone: "🚘",
+                lojas: [
+                    { nome: "Ver no Mercado Livre", link: "#", classe: "btn-ml" }
+                ]
+            },
+            {
+                nome: "Tênis Olympikus Corre 5",
+                categoria: "Esporte",
+                icone: "🏃‍♂️",
+                lojas: [
+                    { nome: "Comprar na Magalu", link: "#", classe: "btn-magalu" }
+                ]
+            },
+            {
+                nome: "E-book: Mapas Mentais para Concursos Públicos",
+                categoria: "Estudos",
+                icone: "📚",
+                lojas: [
+                    { nome: "Comprar na Hotmart", link: "#", classe: "btn-hotmart" }
+                ]
+            },
+            {
+                nome: "Capa Chave Canivete Chevrolet",
+                categoria: "Automotivo",
+                icone: "🔑",
+                lojas: [
+                    { nome: "Ver no Mercado Livre", link: "#", classe: "btn-ml" }
+                ]
+            }
+        ];
+
+        // Lógica de Funcionamento do Site
+        const productContainer = document.getElementById('productContainer');
+        const searchInput = document.getElementById('searchInput');
+        const categoryContainer = document.getElementById('categoryContainer');
+        let currentCategory = 'Todas';
+
+        // 1. Extrair categorias únicas automaticamente
+        const categories = ['Todas', ...new Set(products.map(p => p.categoria))];
+
+        // 2. Criar botões de filtro
+        function renderCategories() {
+            categoryContainer.innerHTML = '';
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = `filter-btn ${cat === currentCategory ? 'active' : ''}`;
+                btn.textContent = cat;
+                btn.onclick = () => {
+                    currentCategory = cat;
+                    renderCategories(); // Atualiza a cor do botão ativo
+                    filterProducts();   // Filtra os produtos
+                };
+                categoryContainer.appendChild(btn);
+            });
+        }
+
+        // 3. Renderizar os produtos na tela
+        function renderProducts(items) {
+            productContainer.innerHTML = '';
+            
+            if (items.length === 0) {
+                productContainer.innerHTML = '<div class="no-results">Nenhum produto encontrado com esse nome ou categoria. 😕</div>';
+                return;
+            }
+
+            items.forEach(produto => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                // Gera os botões de loja dinamicamente
+                const buttonsHtml = produto.lojas.map(loja => 
+                    `<a href="${loja.link}" target="_blank" class="btn ${loja.classe}">${loja.nome}</a>`
+                ).join('');
+
+                card.innerHTML = `
+                    <div class="product-img">${produto.icone}</div>
+                    <div class="product-info">
+                        <span class="product-category">${produto.categoria}</span>
+                        <h2 class="product-title">${produto.nome}</h2>
+                        <div class="stores-container">
+                            ${buttonsHtml}
+                        </div>
+                    </div>
+                `;
+                productContainer.appendChild(card);
+            });
+        }
+
+        // 4. Lógica unida de Busca por texto + Filtro de categoria
+        function filterProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            const filtrados = products.filter(produto => {
+                const matchName = produto.nome.toLowerCase().includes(searchTerm);
+                const matchCategory = currentCategory === 'Todas' || produto.categoria === currentCategory;
+                return matchName && matchCategory;
+            });
+
+            renderProducts(filtrados);
+        }
+
+        // Eventos
+        searchInput.addEventListener('input', filterProducts);
+
+        // Inicialização
+        renderCategories();
+        filterProducts();
+    </script>
+</body>
+</html>
