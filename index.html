@@ -67,12 +67,10 @@
         </div>
     </header>
 
-    <div class="categories" id="categoryContainer">
-        <!-- Os botões de categoria serão gerados automaticamente aqui -->
-    </div>
+    <div class="categories" id="categoryContainer"></div>
 
     <div class="container" id="productContainer">
-        <!-- Os produtos aparecerão aqui -->
+        <div class="no-results">Carregando produtos da planilha... ⏳</div>
     </div>
 
     <footer>
@@ -80,91 +78,82 @@
     </footer>
 
     <script>
-        // === SUA BASE DE DADOS DE PRODUTOS ===
-        // Para adicionar um novo produto, basta copiar uma linha abaixo e colar no final da lista.
-        const products = [
-            {
-                nome: "Parafusadeira e Furadeira 72V com Maleta",
-                categoria: "Ferramentas",
-                icone: "🛠️",
-                lojas: [
-                    { nome: "Ver no Mercado Livre", link: "#", classe: "btn-ml" },
-                    { nome: "Ver na Amazon", link: "#", classe: "btn-amazon" }
-                ]
-            },
-            {
-                nome: "Extensor de Torneira Giratório 1080º",
-                categoria: "Casa",
-                icone: "🚰",
-                lojas: [
-                    { nome: "Ver na Shopee", link: "#", classe: "btn-hotmart" } // Usando a cor laranja como exemplo
-                ]
-            },
-            {
-                nome: "Kit Central Multimídia MyLink Touch",
-                categoria: "Automotivo",
-                icone: "🚘",
-                lojas: [
-                    { nome: "Ver no Mercado Livre", link: "#", classe: "btn-ml" }
-                ]
-            },
-            {
-                nome: "Tênis Olympikus Corre 5",
-                categoria: "Esporte",
-                icone: "🏃‍♂️",
-                lojas: [
-                    { nome: "Comprar na Magalu", link: "#", classe: "btn-magalu" }
-                ]
-            },
-            {
-                nome: "E-book: Mapas Mentais para Concursos Públicos",
-                categoria: "Estudos",
-                icone: "📚",
-                lojas: [
-                    { nome: "Comprar na Hotmart", link: "#", classe: "btn-hotmart" }
-                ]
-            },
-            {
-                nome: "Capa Chave Canivete Chevrolet",
-                categoria: "Automotivo",
-                icone: "🔑",
-                lojas: [
-                    { nome: "Ver no Mercado Livre", link: "#", classe: "btn-ml" }
-                ]
-            }
-        ];
-
-        // Lógica de Funcionamento do Site
         const productContainer = document.getElementById('productContainer');
         const searchInput = document.getElementById('searchInput');
         const categoryContainer = document.getElementById('categoryContainer');
+        
         let currentCategory = 'Todas';
+        let products = [];
 
-        // 1. Extrair categorias únicas automaticamente
-        const categories = ['Todas', ...new Set(products.map(p => p.categoria))];
+        // =======================================================
+        // SEU LINK JÁ ESTÁ INSERIDO AQUI NA LINHA ABAIXO:
+        // =======================================================
+        const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgCMgAQ3S7jGnBlTj98ivv0HCQfoos_GCLWssuM54u_k7PPu4Xnp1G8fQiUJkfI4GqFJn4m-CZQtEP/pub?output=tsv"; 
 
-        // 2. Criar botões de filtro
+        async function loadProducts() {
+            try {
+                const response = await fetch(sheetUrl);
+                const data = await response.text();
+                
+                parseTSV(data);
+                renderCategories();
+                filterProducts();
+            } catch (error) {
+                productContainer.innerHTML = '<div class="no-results">Erro ao carregar os produtos. Verifique o link da planilha. 🚨</div>';
+                console.error(error);
+            }
+        }
+
+        function parseTSV(data) {
+            const lines = data.split('\n');
+            products = [];
+            
+            // Pula a primeira linha (cabeçalhos)
+            for (let i = 1; i < lines.length; i++) {
+                if (!lines[i].trim()) continue; // Ignora linhas em branco
+                
+                const cols = lines[i].split('\t'); // Separa as colunas
+                
+                const nome = cols[0];
+                const categoria = cols[1];
+                const icone = cols[2];
+                const lojas = [];
+                
+                // Verifica o Botão 1 (Colunas 3, 4 e 5)
+                if (cols[3] && cols[3].trim() !== '') {
+                    lojas.push({ nome: cols[3].trim(), link: cols[4] ? cols[4].trim() : '#', classe: cols[5] ? cols[5].trim() : '' });
+                }
+                
+                // Verifica o Botão 2 (Colunas 6, 7 e 8)
+                if (cols[6] && cols[6].trim() !== '') {
+                    lojas.push({ nome: cols[6].trim(), link: cols[7] ? cols[7].trim() : '#', classe: cols[8] ? cols[8].trim() : '' });
+                }
+
+                products.push({ nome, categoria, icone, lojas });
+            }
+        }
+
         function renderCategories() {
+            const categories = ['Todas', ...new Set(products.map(p => p.categoria))];
             categoryContainer.innerHTML = '';
+            
             categories.forEach(cat => {
                 const btn = document.createElement('button');
                 btn.className = `filter-btn ${cat === currentCategory ? 'active' : ''}`;
                 btn.textContent = cat;
                 btn.onclick = () => {
                     currentCategory = cat;
-                    renderCategories(); // Atualiza a cor do botão ativo
-                    filterProducts();   // Filtra os produtos
+                    renderCategories(); 
+                    filterProducts();
                 };
                 categoryContainer.appendChild(btn);
             });
         }
 
-        // 3. Renderizar os produtos na tela
         function renderProducts(items) {
             productContainer.innerHTML = '';
-            
             if (items.length === 0) {
-                productContainer.innerHTML = '<div class="no-results">Nenhum produto encontrado com esse nome ou categoria. 😕</div>';
+                productContainer.innerHTML = '<div class="no-results">Nenhum produto encontrado. 😕</div>';
                 return;
             }
 
@@ -172,7 +161,6 @@
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 
-                // Gera os botões de loja dinamicamente
                 const buttonsHtml = produto.lojas.map(loja => 
                     `<a href="${loja.link}" target="_blank" class="btn ${loja.classe}">${loja.nome}</a>`
                 ).join('');
@@ -191,25 +179,20 @@
             });
         }
 
-        // 4. Lógica unida de Busca por texto + Filtro de categoria
         function filterProducts() {
             const searchTerm = searchInput.value.toLowerCase();
-            
             const filtrados = products.filter(produto => {
                 const matchName = produto.nome.toLowerCase().includes(searchTerm);
                 const matchCategory = currentCategory === 'Todas' || produto.categoria === currentCategory;
                 return matchName && matchCategory;
             });
-
             renderProducts(filtrados);
         }
 
-        // Eventos
         searchInput.addEventListener('input', filterProducts);
-
-        // Inicialização
-        renderCategories();
-        filterProducts();
+        
+        // Inicia o processo lendo a planilha
+        loadProducts();
     </script>
 </body>
 </html>
