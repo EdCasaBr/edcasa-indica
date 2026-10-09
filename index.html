@@ -6,9 +6,8 @@
     <title>EdCasa Indica | Ofertas e Achados</title>
     <style>
         :root {
-            /* Nova Paleta de Cores */
-            --primary-blue: #2563eb; /* Azul Royal (Confiança/Segurança) */
-            --action-orange: #f97316; /* Laranja (Ação/Oferta) */
+            --primary-blue: #2563eb; 
+            --action-orange: #f97316; 
             --bg: #f8fafc;
             --text: #1e293b;
             --card-bg: #ffffff;
@@ -17,16 +16,13 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg); color: var(--text); }
         
-        /* Header Modernizado com Nova Logo */
+        /* Header */
         header { background-color: var(--card-bg); padding: 40px 20px 30px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border-bottom: 3px solid var(--primary-blue); }
-        
         .logo-container { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 15px; }
         .logo-icon { width: 48px; height: 48px; color: var(--action-orange); animation: bounceIn 0.8s ease-out; }
-        
         header h1 { font-size: 36px; font-weight: 800; letter-spacing: -0.5px; }
         .text-blue { color: var(--primary-blue); }
         .text-orange { color: var(--action-orange); font-weight: 300; }
-        
         header p { color: #64748b; font-size: 16px; margin-bottom: 25px; font-weight: 500; }
         
         .search-container { max-width: 600px; margin: 0 auto; position: relative; }
@@ -39,14 +35,33 @@
         .filter-btn:hover { border-color: var(--border-light); color: var(--primary-blue); }
         .filter-btn.active { background-color: var(--primary-blue); color: white; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3); }
 
+        /* MULTI-BANNER GLOBAL (Amazon, Magalu, Shopee) */
+        .global-banner { max-width: 1200px; margin: 20px auto 10px; padding: 25px; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 16px; text-align: center; box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+        .global-banner-text h3 { color: #ffffff; font-size: 20px; margin-bottom: 8px; }
+        .global-banner-text p { color: #cbd5e1; font-size: 15px; margin-bottom: 20px; }
+        
+        /* Container dos 3 botões globais */
+        .multi-btn-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        
+        .btn-global { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 24px; border-radius: 10px; font-weight: 700; text-decoration: none; transition: transform 0.2s; font-size: 14px; min-width: 200px; flex: 1; max-width: 300px; }
+        .btn-global:hover { transform: scale(1.03); filter: brightness(1.1); }
+        
+        /* Cores Específicas dos Botões Globais */
+        .btn-global-amazon { background-color: #FF9900; color: #111111; }
+        .btn-global-magalu { background-color: #0086FF; color: #ffffff; }
+        .btn-global-shopee { background-color: #ee4d2d; color: #ffffff; }
+
         /* Container de Produtos */
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; min-height: 50vh; }
-        .no-results { grid-column: 1 / -1; text-align: center; color: #64748b; font-size: 18px; padding: 60px 20px; font-weight: 500; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; min-height: 40vh; }
+        
+        /* Tela de Não Encontrado (Com os 3 botões) */
+        .no-results { grid-column: 1 / -1; text-align: center; padding: 50px 20px; background-color: var(--card-bg); border-radius: 16px; border: 1px dashed var(--border-light); box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .no-results h3 { color: var(--text); margin-bottom: 12px; font-size: 22px; }
+        .no-results p { color: #64748b; margin-bottom: 30px; font-size: 16px; }
 
         /* Cartão de Produto */
         .product-card { background: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.03), 0 10px 15px rgba(0,0,0,0.03); transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; animation: fadeIn 0.5s ease-out; border: 1px solid var(--border-light); }
         .product-card:hover { transform: translateY(-8px); box-shadow: 0 12px 20px rgba(0,0,0,0.08), 0 20px 25px rgba(0,0,0,0.05); }
-        
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes bounceIn { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); } }
         
@@ -59,21 +74,20 @@
         .btn { text-decoration: none; text-align: center; padding: 14px; border-radius: 10px; font-weight: 700; color: white; transition: all 0.2s; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
         .btn:hover { filter: brightness(1.1); transform: scale(1.02); }
         
-        /* Cores dos Botões das Lojas (Mantidas e polidas) */
+        /* Cores dos Botões dos Cartões da Planilha */
         .btn-ml { background-color: #FFE600; color: #2d3748; }
         .btn-amazon { background-color: #232F3E; color: #FF9900; }
         .btn-magalu { background-color: #0086FF; }
         .btn-hotmart { background-color: #F04E23; }
 
         footer { text-align: center; padding: 30px 20px; background-color: var(--card-bg); color: #94a3b8; font-size: 14px; border-top: 1px solid var(--border-light); margin-top: 40px; }
-
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo-container">
-            <!-- Logo Dinâmica (Caixa de Presente em SVG) -->
             <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="21 8 21 21 3 21 3 8"></polyline>
                 <rect x="1" y="3" width="22" height="5"></rect>
@@ -92,8 +106,22 @@
 
     <div class="categories" id="categoryContainer"></div>
 
+    <!-- BANNER FIXO GERAL COM 3 BOTÕES -->
+    <div class="global-banner" id="globalBanner" style="margin-left: 20px; margin-right: 20px;">
+        <div class="global-banner-text">
+            <h3>Navegue pelos maiores catálogos do Brasil</h3>
+            <p>Escolha sua loja favorita. Comprando pelos links abaixo você apoia nossa curadoria.</p>
+        </div>
+        
+        <div class="multi-btn-container" id="bannerButtons">
+            <!-- Os botões são injetados aqui pelo JavaScript -->
+        </div>
+    </div>
+
     <div class="container" id="productContainer">
-        <div class="no-results">Conectando ao catálogo de ofertas... ⏳</div>
+        <div class="no-results">
+            <h3>Conectando ao catálogo de ofertas... ⏳</h3>
+        </div>
     </div>
 
     <footer>
@@ -104,47 +132,54 @@
         const productContainer = document.getElementById('productContainer');
         const searchInput = document.getElementById('searchInput');
         const categoryContainer = document.getElementById('categoryContainer');
+        const globalBanner = document.getElementById('globalBanner');
+        const bannerButtons = document.getElementById('bannerButtons');
         
         let currentCategory = 'Todas';
         let products = [];
 
-        // O link da sua planilha já está configurado aqui:
+        // LINK DA SUA PLANILHA
         const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgCMgAQ3S7jGnBlTj98ivv0HCQfoos_GCLWssuM54u_k7PPu4Xnp1G8fQiUJkfI4GqFJn4m-CZQtEP/pub?output=tsv"; 
+        
+        // ==============================================================
+        // 1. SEUS LINKS GERAIS JÁ ESTÃO CONFIGURADOS AQUI:
+        // ==============================================================
+        const linkAmazon = "https://link.amazon/B0eOCEO3C";
+        const linkMagalu = "https://www.magazinevoce.com.br/magazinein_108386/";
+        const linkShopee = "https://s.shopee.com.br/6fhvirNRke";
+
+        // Constrói os botões do banner principal dinamicamente
+        bannerButtons.innerHTML = `
+            <a href="${linkAmazon}" target="_blank" class="btn-global btn-global-amazon">📦 Amazon</a>
+            <a href="${linkMagalu}" target="_blank" class="btn-global btn-global-magalu">💙 Magalu</a>
+            <a href="${linkShopee}" target="_blank" class="btn-global btn-global-shopee">🛍️ Shopee</a>
+        `;
 
         async function loadProducts() {
             try {
                 const response = await fetch(sheetUrl);
                 const data = await response.text();
-                
                 parseTSV(data);
                 renderCategories();
                 filterProducts();
             } catch (error) {
-                productContainer.innerHTML = '<div class="no-results">Erro ao carregar os produtos. Atualize a página. 🚨</div>';
-                console.error(error);
+                productContainer.innerHTML = '<div class="no-results"><h3>Erro de conexão</h3><p>Atualize a página para recarregar as ofertas.</p></div>';
             }
         }
 
         function parseTSV(data) {
             const lines = data.split('\n');
             products = [];
-            
             for (let i = 1; i < lines.length; i++) {
                 if (!lines[i].trim()) continue;
-                
                 const cols = lines[i].split('\t');
                 const nome = cols[0];
                 const categoria = cols[1];
                 const icone = cols[2];
                 const lojas = [];
                 
-                if (cols[3] && cols[3].trim() !== '') {
-                    lojas.push({ nome: cols[3].trim(), link: cols[4] ? cols[4].trim() : '#', classe: cols[5] ? cols[5].trim() : '' });
-                }
-                
-                if (cols[6] && cols[6].trim() !== '') {
-                    lojas.push({ nome: cols[6].trim(), link: cols[7] ? cols[7].trim() : '#', classe: cols[8] ? cols[8].trim() : '' });
-                }
+                if (cols[3] && cols[3].trim() !== '') lojas.push({ nome: cols[3].trim(), link: cols[4] ? cols[4].trim() : '#', classe: cols[5] ? cols[5].trim() : '' });
+                if (cols[6] && cols[6].trim() !== '') lojas.push({ nome: cols[6].trim(), link: cols[7] ? cols[7].trim() : '#', classe: cols[8] ? cols[8].trim() : '' });
 
                 products.push({ nome, categoria, icone, lojas });
             }
@@ -153,7 +188,6 @@
         function renderCategories() {
             const categories = ['Todas', ...new Set(products.map(p => p.categoria))];
             categoryContainer.innerHTML = '';
-            
             categories.forEach(cat => {
                 const btn = document.createElement('button');
                 btn.className = `filter-btn ${cat === currentCategory ? 'active' : ''}`;
@@ -169,15 +203,27 @@
 
         function renderProducts(items) {
             productContainer.innerHTML = '';
+            
+            // Lógica para Busca Vazia com os 3 Botões Inteligentes
             if (items.length === 0) {
-                productContainer.innerHTML = '<div class="no-results">Nenhum produto encontrado na busca. 😕</div>';
+                const termo = searchInput.value;
+                productContainer.innerHTML = `
+                    <div class="no-results">
+                        <h3>Nenhum resultado para "${termo}" na vitrine rápida. 😕</h3>
+                        <p>Mas não perca a viagem! Busque por "${termo}" direto no catálogo oficial da sua loja favorita:</p>
+                        <div class="multi-btn-container" style="margin-top: 25px;">
+                            <a href="${linkAmazon}" target="_blank" class="btn-global btn-global-amazon">📦 Amazon</a>
+                            <a href="${linkMagalu}" target="_blank" class="btn-global btn-global-magalu">💙 Magalu</a>
+                            <a href="${linkShopee}" target="_blank" class="btn-global btn-global-shopee">🛍️ Shopee</a>
+                        </div>
+                    </div>
+                `;
                 return;
             }
 
             items.forEach(produto => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
-                
                 const buttonsHtml = produto.lojas.map(loja => 
                     `<a href="${loja.link}" target="_blank" class="btn ${loja.classe}">${loja.nome}</a>`
                 ).join('');
@@ -187,9 +233,7 @@
                     <div class="product-info">
                         <span class="product-category">${produto.categoria}</span>
                         <h2 class="product-title">${produto.nome}</h2>
-                        <div class="stores-container">
-                            ${buttonsHtml}
-                        </div>
+                        <div class="stores-container">${buttonsHtml}</div>
                     </div>
                 `;
                 productContainer.appendChild(card);
@@ -198,6 +242,13 @@
 
         function filterProducts() {
             const searchTerm = searchInput.value.toLowerCase();
+            
+            if (searchTerm.length > 0) {
+                globalBanner.classList.add('hidden');
+            } else {
+                globalBanner.classList.remove('hidden');
+            }
+
             const filtrados = products.filter(produto => {
                 const matchName = produto.nome.toLowerCase().includes(searchTerm);
                 const matchCategory = currentCategory === 'Todas' || produto.categoria === currentCategory;
