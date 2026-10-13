@@ -16,7 +16,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg); color: var(--text); position: relative; }
         
-        /* Header */
         header { background-color: var(--card-bg); padding: 40px 20px 30px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border-bottom: 3px solid var(--primary-blue); }
         .logo-container { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 15px; }
         .logo-icon { width: 48px; height: 48px; color: var(--action-orange); animation: bounceIn 0.8s ease-out; }
@@ -29,13 +28,11 @@
         #searchInput { width: 100%; padding: 16px 24px; font-size: 16px; border: 2px solid var(--border-light); border-radius: 50px; outline: none; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
         #searchInput:focus { border-color: var(--primary-blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
 
-        /* Categorias */
         .categories { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 25px 20px 10px; max-width: 1200px; margin: 0 auto; }
         .filter-btn { padding: 10px 20px; border: 2px solid transparent; background-color: var(--card-bg); color: #475569; border-radius: 30px; cursor: pointer; font-weight: 600; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .filter-btn:hover { border-color: var(--border-light); color: var(--primary-blue); }
         .filter-btn.active { background-color: var(--primary-blue); color: white; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3); }
 
-        /* Banner de Busca Global */
         .global-banner { max-width: 1200px; margin: 20px auto 10px; padding: 25px; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 16px; text-align: center; box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
         .global-banner-text h3 { color: #ffffff; font-size: 20px; margin-bottom: 8px; }
         .global-banner-text p { color: #cbd5e1; font-size: 15px; margin-bottom: 20px; }
@@ -46,16 +43,13 @@
         .btn-global-magalu { background-color: #0086FF; color: #ffffff; }
         .btn-global-shopee { background-color: #ee4d2d; color: #ffffff; }
 
-        /* Container de Produtos */
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; min-height: 40vh; }
         .no-results { grid-column: 1 / -1; text-align: center; padding: 50px 20px; background-color: var(--card-bg); border-radius: 16px; border: 1px dashed var(--border-light); }
         .no-results h3 { color: var(--text); margin-bottom: 12px; font-size: 22px; }
         .no-results p { color: #64748b; margin-bottom: 30px; font-size: 16px; }
 
-        /* Cartão de Produto */
-        .product-card { background: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.03), 0 10px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; animation: fadeIn 0.5s ease-out; border: 1px solid var(--border-light); }
+        .product-card { background: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.03), 0 10px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; border: 1px solid var(--border-light); }
         .product-card:hover { transform: translateY(-8px); box-shadow: 0 12px 20px rgba(0,0,0,0.08); }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes bounceIn { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); } }
         
         .product-img { width: 100%; height: 220px; background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); display: flex; align-items: center; justify-content: center; font-size: 64px; }
@@ -64,42 +58,49 @@
         .product-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; line-height: 1.4; color: var(--text); }
         
         .stores-container { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
-        .btn { text-decoration: none; text-align: center; padding: 14px; border-radius: 10px; font-weight: 700; color: white; transition: all 0.2s; font-size: 14px; text-transform: uppercase; }
-        .btn:hover { filter: brightness(1.1); transform: scale(1.02); }
+        .btn { text-decoration: none; text-align: center; padding: 14px; border-radius: 10px; font-weight: 700; color: white; font-size: 14px; text-transform: uppercase; }
         .btn-ml { background-color: #FFE600; color: #2d3748; }
         .btn-amazon { background-color: #232F3E; color: #FF9900; }
         .btn-magalu { background-color: #0086FF; }
         .btn-hotmart { background-color: #F04E23; }
 
         /* =========================================
-           FUNIL INTERATIVO (ASSISTENTE VIRTUAL)
+           ESTILOS DO CHATBOT NATIVO
            ========================================= */
-        /* Botão Flutuante */
         .fab-container { position: fixed; bottom: 30px; right: 30px; display: flex; align-items: center; gap: 15px; cursor: pointer; z-index: 100; animation: bounceIn 1s; }
-        .fab-text { background-color: var(--card-bg); padding: 10px 15px; border-radius: 20px; font-weight: 700; color: var(--text); box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid var(--border-light); font-size: 14px; }
+        .fab-text { background-color: var(--primary-blue); padding: 10px 15px; border-radius: 20px; font-weight: 700; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-size: 14px; }
         .fab-icon { width: 60px; height: 60px; background-color: var(--action-orange); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 28px; box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4); color: white; transition: transform 0.3s; }
         .fab-container:hover .fab-icon { transform: scale(1.1); }
 
-        /* Overlay do Quiz */
-        .quiz-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(5px); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-        .quiz-overlay.active { opacity: 1; pointer-events: auto; }
+        .chat-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(5px); z-index: 1000; display: flex; justify-content: center; align-items: flex-end; opacity: 0; pointer-events: none; transition: opacity 0.3s; padding: 20px; }
+        .chat-overlay.active { opacity: 1; pointer-events: auto; }
         
-        .quiz-modal { background: var(--card-bg); width: 90%; max-width: 500px; border-radius: 24px; padding: 40px 30px; position: relative; transform: translateY(20px); transition: transform 0.3s; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); text-align: center; max-height: 90vh; overflow-y: auto; }
-        .quiz-overlay.active .quiz-modal { transform: translateY(0); }
+        .chat-modal { background: var(--bg); width: 100%; max-width: 450px; height: 85vh; border-radius: 24px; display: flex; flex-direction: column; transform: translateY(50px); transition: transform 0.3s; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); overflow: hidden; }
+        .chat-overlay.active .chat-modal { transform: translateY(0); }
         
-        .close-quiz { position: absolute; top: 20px; right: 20px; font-size: 24px; color: #94a3b8; cursor: pointer; background: none; border: none; transition: color 0.2s; }
-        .close-quiz:hover { color: var(--text); }
+        .chat-header { background: var(--card-bg); padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); }
+        .chat-header-title { font-weight: 800; font-size: 18px; color: var(--text); display: flex; align-items: center; gap: 10px; }
+        .close-chat { font-size: 24px; color: #94a3b8; cursor: pointer; background: none; border: none; }
+        
+        .chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        
+        .msg { max-width: 85%; padding: 12px 16px; border-radius: 16px; font-size: 15px; line-height: 1.4; animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .msg-bot { background: var(--card-bg); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border-light); }
+        .msg-user { background: var(--primary-blue); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+        
+        /* Ajuste dos cartões dentro do chat */
+        .chat-body .product-card { width: 100%; max-width: 300px; margin-top: 10px; align-self: flex-start; animation: slideUp 0.3s ease-out; }
+        .chat-body .product-img { height: 150px; font-size: 40px; }
+        .chat-body .product-info { padding: 15px; }
+        .chat-body .product-title { font-size: 15px; margin-bottom: 10px; }
+        .chat-body .btn { padding: 10px; font-size: 12px; }
 
-        .quiz-header { font-size: 40px; margin-bottom: 15px; }
-        .quiz-title { font-size: 24px; font-weight: 800; color: var(--text); margin-bottom: 10px; }
-        .quiz-subtitle { color: #64748b; font-size: 16px; margin-bottom: 30px; }
-
-        .quiz-options { display: flex; flex-direction: column; gap: 12px; }
-        .quiz-btn { background: #f1f5f9; border: 2px solid transparent; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 700; color: var(--text); cursor: pointer; transition: all 0.2s; text-align: left; display: flex; justify-content: space-between; align-items: center; }
-        .quiz-btn:hover { background: #e0e7ff; border-color: var(--primary-blue); color: var(--primary-blue); transform: translateX(5px); }
-
-        /* Resultado do Quiz em Grid Menor */
-        .quiz-result-container { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 20px; text-align: left; }
+        .chat-footer { background: var(--card-bg); padding: 15px 20px; display: flex; gap: 10px; border-top: 1px solid var(--border-light); }
+        .chat-input { flex: 1; padding: 12px 15px; border: 1px solid var(--border-light); border-radius: 20px; outline: none; font-size: 15px; }
+        .chat-input:focus { border-color: var(--primary-blue); }
+        .chat-send { background: var(--action-orange); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; justify-content: center; align-items: center; }
 
         footer { text-align: center; padding: 30px 20px; background-color: var(--card-bg); color: #94a3b8; font-size: 14px; border-top: 1px solid var(--border-light); margin-top: 40px; }
         .hidden { display: none !important; }
@@ -136,41 +137,30 @@
     </div>
 
     <div class="container" id="productContainer">
-        <div class="no-results">
-            <h3>Conectando ao catálogo de ofertas... ⏳</h3>
-        </div>
+        <div class="no-results"><h3>Conectando ao catálogo de ofertas... ⏳</h3></div>
     </div>
 
-    <!-- BOTÃO DO FUNIL -->
-    <div class="fab-container" onclick="openQuiz()">
-        <div class="fab-text">Me ajude a escolher</div>
-        <div class="fab-icon">🤖</div>
+    <!-- BOTÃO DO CHAT -->
+    <div class="fab-container" onclick="openChat()">
+        <div class="fab-text">Assistente Virtual</div>
+        <div class="fab-icon">💬</div>
     </div>
 
-    <!-- INTERFACE DO FUNIL (MODAL) -->
-    <div class="quiz-overlay" id="quizOverlay">
-        <div class="quiz-modal">
-            <button class="close-quiz" onclick="closeQuiz()">&times;</button>
-            
-            <!-- Etapa 1: Pergunta Dinâmica -->
-            <div id="quizStep1">
-                <div class="quiz-header">👋</div>
-                <h2 class="quiz-title">O que você está procurando hoje?</h2>
-                <p class="quiz-subtitle">Selecione uma área para encontrarmos a solução ideal.</p>
-                <div class="quiz-options" id="quizDynamicOptions">
-                    <!-- Gerado automaticamente via JavaScript -->
-                </div>
+    <!-- INTERFACE DO CHATBOT NATIVO -->
+    <div class="chat-overlay" id="chatOverlay">
+        <div class="chat-modal">
+            <div class="chat-header">
+                <div class="chat-header-title">🤖 Assistente EdCasa</div>
+                <button class="close-chat" onclick="closeChat()">&times;</button>
             </div>
-
-            <!-- Etapa 2: Resultado do Funil -->
-            <div id="quizStep2" class="hidden">
-                <div class="quiz-header">🎯</div>
-                <h2 class="quiz-title">Encontrei!</h2>
-                <p class="quiz-subtitle">Aqui estão as melhores recomendações para o seu objetivo:</p>
-                <div class="quiz-result-container" id="quizResultArea">
-                    <!-- Produtos filtrados aparecem aqui -->
-                </div>
-                <button class="quiz-btn" style="margin-top: 20px; justify-content: center;" onclick="resetQuiz()">🔄 Refazer busca guiada</button>
+            
+            <div class="chat-body" id="chatBody">
+                <div class="msg msg-bot">Olá! O que você está procurando hoje? Me diga o nome do produto ou marca.</div>
+            </div>
+            
+            <div class="chat-footer">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Ex: Furadeira, Geladeira, Tênis..." onkeypress="handleEnter(event)">
+                <button class="chat-send" onclick="processUserMessage()">➔</button>
             </div>
         </div>
     </div>
@@ -189,11 +179,19 @@
         let currentCategory = 'Todas';
         let products = [];
 
-        // LINKS OFICIAIS
+        // BASE DE DADOS
         const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgCMgAQ3S7jGnBlTj98ivv0HCQfoos_GCLWssuM54u_k7PPu4Xnp1G8fQiUJkfI4GqFJn4m-CZQtEP/pub?output=tsv"; 
-        const linkAmazon = "https://link.amazon/B0eOCEO3C";
+        
+        // LINKS GERAIS ESTÁTICOS
+        const linkAmazon = "https://link.amazon/B03dYw9Ke";
         const linkMagalu = "https://www.magazinevoce.com.br/magazinein_108386/";
         const linkShopee = "https://s.shopee.com.br/6fhvirNRke";
+
+        // ==============================================================
+        // CONFIGURAÇÃO DA BUSCA DINÂMICA (SUAS TAGS)
+        // ==============================================================
+        const tagAmazon = "edcasa01-20";
+        const baseUrlMagalu = "https://www.magazinevoce.com.br/magazinein_108386/busca/";
 
         bannerButtons.innerHTML = `
             <a href="${linkAmazon}" target="_blank" class="btn-global btn-global-amazon">📦 Amazon</a>
@@ -209,7 +207,7 @@
                 renderCategories();
                 filterProducts();
             } catch (error) {
-                productContainer.innerHTML = '<div class="no-results"><h3>Erro de conexão</h3><p>Atualize a página para recarregar as ofertas.</p></div>';
+                productContainer.innerHTML = '<div class="no-results"><h3>Erro de conexão</h3></div>';
             }
         }
 
@@ -223,10 +221,8 @@
                 const categoria = cols[1];
                 const icone = cols[2];
                 const lojas = [];
-                
                 if (cols[3] && cols[3].trim() !== '') lojas.push({ nome: cols[3].trim(), link: cols[4] ? cols[4].trim() : '#', classe: cols[5] ? cols[5].trim() : '' });
                 if (cols[6] && cols[6].trim() !== '') lojas.push({ nome: cols[6].trim(), link: cols[7] ? cols[7].trim() : '#', classe: cols[8] ? cols[8].trim() : '' });
-
                 products.push({ nome, categoria, icone, lojas });
             }
         }
@@ -248,38 +244,31 @@
         }
 
         function createProductCardHTML(produto) {
-            const buttonsHtml = produto.lojas.map(loja => 
-                `<a href="${loja.link}" target="_blank" class="btn ${loja.classe}">${loja.nome}</a>`
-            ).join('');
+            const buttonsHtml = produto.lojas.map(loja => `<a href="${loja.link}" target="_blank" class="btn ${loja.classe}">${loja.nome}</a>`).join('');
             return `
                 <div class="product-img">${produto.icone}</div>
                 <div class="product-info">
                     <span class="product-category">${produto.categoria}</span>
                     <h2 class="product-title">${produto.nome}</h2>
                     <div class="stores-container">${buttonsHtml}</div>
-                </div>
-            `;
+                </div>`;
         }
 
         function renderProducts(items) {
             productContainer.innerHTML = '';
-            
             if (items.length === 0) {
                 const termo = searchInput.value;
                 productContainer.innerHTML = `
                     <div class="no-results">
                         <h3>Nenhum resultado para "${termo}" na vitrine rápida. 😕</h3>
-                        <p>Mas não perca a viagem! Busque por "${termo}" direto no catálogo oficial da sua loja favorita:</p>
                         <div class="multi-btn-container" style="margin-top: 25px;">
                             <a href="${linkAmazon}" target="_blank" class="btn-global btn-global-amazon">📦 Amazon</a>
                             <a href="${linkMagalu}" target="_blank" class="btn-global btn-global-magalu">💙 Magalu</a>
                             <a href="${linkShopee}" target="_blank" class="btn-global btn-global-shopee">🛍️ Shopee</a>
                         </div>
-                    </div>
-                `;
+                    </div>`;
                 return;
             }
-
             items.forEach(produto => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
@@ -290,11 +279,9 @@
 
         function filterProducts() {
             const searchTerm = searchInput.value.toLowerCase();
-            if (searchTerm.length > 0) {
-                globalBanner.classList.add('hidden');
-            } else {
-                globalBanner.classList.remove('hidden');
-            }
+            if (searchTerm.length > 0) globalBanner.classList.add('hidden');
+            else globalBanner.classList.remove('hidden');
+            
             const filtrados = products.filter(produto => {
                 const matchName = produto.nome.toLowerCase().includes(searchTerm);
                 const matchCategory = currentCategory === 'Todas' || produto.categoria === currentCategory;
@@ -304,57 +291,78 @@
         }
 
         // =========================================
-        // LÓGICA DO FUNIL INTERATIVO
+        // LÓGICA DO CHATBOT NATIVO
         // =========================================
-        const quizOverlay = document.getElementById('quizOverlay');
-        const quizStep1 = document.getElementById('quizStep1');
-        const quizStep2 = document.getElementById('quizStep2');
-        const quizDynamicOptions = document.getElementById('quizDynamicOptions');
-        const quizResultArea = document.getElementById('quizResultArea');
+        const chatOverlay = document.getElementById('chatOverlay');
+        const chatBody = document.getElementById('chatBody');
+        const chatInput = document.getElementById('chatInput');
 
-        function openQuiz() {
-            quizOverlay.classList.add('active');
-            buildQuizOptions();
+        function openChat() {
+            chatOverlay.classList.add('active');
+            chatInput.focus();
         }
 
-        function closeQuiz() {
-            quizOverlay.classList.remove('active');
-            setTimeout(resetQuiz, 300);
+        function closeChat() {
+            chatOverlay.classList.remove('active');
         }
 
-        function resetQuiz() {
-            quizStep1.classList.remove('hidden');
-            quizStep2.classList.add('hidden');
+        function handleEnter(e) {
+            if (e.key === 'Enter') processUserMessage();
         }
 
-        // Cria as perguntas do funil lendo as categorias exatas da sua planilha
-        function buildQuizOptions() {
-            const categories = [...new Set(products.map(p => p.categoria))];
-            quizDynamicOptions.innerHTML = '';
-            
-            categories.forEach(cat => {
-                const btn = document.createElement('button');
-                btn.className = 'quiz-btn';
-                btn.innerHTML = `Solução para ${cat} <span>➔</span>`;
-                btn.onclick = () => showQuizResult(cat);
-                quizDynamicOptions.appendChild(btn);
-            });
+        function addMessage(text, sender) {
+            const div = document.createElement('div');
+            div.className = `msg ${sender === 'user' ? 'msg-user' : 'msg-bot'}`;
+            div.innerHTML = text;
+            chatBody.appendChild(div);
+            chatBody.scrollTop = chatBody.scrollHeight;
         }
 
-        // Exibe o link cirúrgico baseado na resposta do cliente
-        function showQuizResult(selectedCategory) {
-            quizStep1.classList.add('hidden');
-            quizStep2.classList.remove('hidden');
-            
-            const matchedProducts = products.filter(p => p.categoria === selectedCategory);
-            quizResultArea.innerHTML = '';
-            
-            matchedProducts.forEach(produto => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = createProductCardHTML(produto);
-                quizResultArea.appendChild(card);
-            });
+        function processUserMessage() {
+            const termo = chatInput.value.trim();
+            if (termo === '') return;
+
+            // 1. Renderiza a mensagem do usuário
+            addMessage(termo, 'user');
+            chatInput.value = '';
+
+            setTimeout(() => {
+                const buscaLower = termo.toLowerCase();
+                
+                // 2. Procura na planilha (Curadoria)
+                const resultados = products.filter(p => p.nome.toLowerCase().includes(buscaLower) || p.categoria.toLowerCase().includes(buscaLower));
+
+                if (resultados.length > 0) {
+                    addMessage("Encontrei estas opções na nossa curadoria especial:", 'bot');
+                    // Exibe os produtos achados dentro do chat
+                    resultados.slice(0, 3).forEach(produto => {
+                        const card = document.createElement('div');
+                        card.className = 'product-card';
+                        card.innerHTML = createProductCardHTML(produto);
+                        chatBody.appendChild(card);
+                    });
+                } else {
+                    // 3. Não achou na planilha: Gera links dinâmicos para a busca
+                    const termoCodificado = encodeURIComponent(termo);
+                    
+                    const dynamicMagalu = `${baseUrlMagalu}${termoCodificado}/`;
+                    const dynamicAmazon = `https://www.amazon.com.br/s?k=${termoCodificado}&tag=${tagAmazon}`;
+                    const dynamicShopee = linkShopee; // Shopee usa link geral
+                    
+                    addMessage(`Não tenho "<b>${termo}</b>" na minha lista separada, mas gerei os atalhos para você pesquisar direto nas lojas oficiais:`, 'bot');
+                    
+                    const buttonsContainer = document.createElement('div');
+                    buttonsContainer.className = 'multi-btn-container';
+                    buttonsContainer.style.marginTop = '10px';
+                    buttonsContainer.innerHTML = `
+                        <a href="${dynamicMagalu}" target="_blank" class="btn-global btn-global-magalu" style="min-width:100%; padding:10px;">💙 Buscar na Magalu</a>
+                        <a href="${dynamicAmazon}" target="_blank" class="btn-global btn-global-amazon" style="min-width:100%; padding:10px;">📦 Buscar na Amazon</a>
+                        <a href="${dynamicShopee}" target="_blank" class="btn-global btn-global-shopee" style="min-width:100%; padding:10px;">🛍️ Ver Ofertas Shopee</a>
+                    `;
+                    chatBody.appendChild(buttonsContainer);
+                }
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 600); // Delay para parecer que está digitando
         }
 
         searchInput.addEventListener('input', filterProducts);
