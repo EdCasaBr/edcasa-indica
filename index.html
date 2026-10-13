@@ -90,7 +90,6 @@
         .msg-bot { background: var(--card-bg); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border-light); }
         .msg-user { background: var(--primary-blue); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
         
-        /* Ajuste dos cartões dentro do chat */
         .chat-body .product-card { width: 100%; max-width: 300px; margin-top: 10px; align-self: flex-start; animation: slideUp 0.3s ease-out; }
         .chat-body .product-img { height: 150px; font-size: 40px; }
         .chat-body .product-info { padding: 15px; }
@@ -187,9 +186,7 @@
         const linkMagalu = "https://www.magazinevoce.com.br/magazinein_108386/";
         const linkShopee = "https://s.shopee.com.br/6fhvirNRke";
 
-        // ==============================================================
-        // CONFIGURAÇÃO DA BUSCA DINÂMICA (SUAS TAGS)
-        // ==============================================================
+        // CONFIGURAÇÃO DA BUSCA DINÂMICA
         const tagAmazon = "edcasa01-20";
         const baseUrlMagalu = "https://www.magazinevoce.com.br/magazinein_108386/busca/";
 
@@ -256,19 +253,29 @@
 
         function renderProducts(items) {
             productContainer.innerHTML = '';
+            
+            // INTEGRAÇÃO: Barra principal agora gera links dinâmicos também
             if (items.length === 0) {
                 const termo = searchInput.value;
+                const termoCodificado = encodeURIComponent(termo);
+                
+                const dynamicMagalu = `${baseUrlMagalu}${termoCodificado}/`;
+                const dynamicAmazon = `https://www.amazon.com.br/s?k=${termoCodificado}&tag=${tagAmazon}`;
+                const dynamicShopee = linkShopee; 
+                
                 productContainer.innerHTML = `
                     <div class="no-results">
-                        <h3>Nenhum resultado para "${termo}" na vitrine rápida. 😕</h3>
+                        <h3>Não tenho "<b>${termo}</b>" na minha lista separada. 😕</h3>
+                        <p>Mas gerei os atalhos para você pesquisar direto nas lojas oficiais:</p>
                         <div class="multi-btn-container" style="margin-top: 25px;">
-                            <a href="${linkAmazon}" target="_blank" class="btn-global btn-global-amazon">📦 Amazon</a>
-                            <a href="${linkMagalu}" target="_blank" class="btn-global btn-global-magalu">💙 Magalu</a>
-                            <a href="${linkShopee}" target="_blank" class="btn-global btn-global-shopee">🛍️ Shopee</a>
+                            <a href="${dynamicMagalu}" target="_blank" class="btn-global btn-global-magalu">💙 Buscar na Magalu</a>
+                            <a href="${dynamicAmazon}" target="_blank" class="btn-global btn-global-amazon">📦 Buscar na Amazon</a>
+                            <a href="${dynamicShopee}" target="_blank" class="btn-global btn-global-shopee">🛍️ Ver Ofertas Shopee</a>
                         </div>
                     </div>`;
                 return;
             }
+            
             items.forEach(produto => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
@@ -322,19 +329,16 @@
             const termo = chatInput.value.trim();
             if (termo === '') return;
 
-            // 1. Renderiza a mensagem do usuário
             addMessage(termo, 'user');
             chatInput.value = '';
 
             setTimeout(() => {
                 const buscaLower = termo.toLowerCase();
                 
-                // 2. Procura na planilha (Curadoria)
                 const resultados = products.filter(p => p.nome.toLowerCase().includes(buscaLower) || p.categoria.toLowerCase().includes(buscaLower));
 
                 if (resultados.length > 0) {
                     addMessage("Encontrei estas opções na nossa curadoria especial:", 'bot');
-                    // Exibe os produtos achados dentro do chat
                     resultados.slice(0, 3).forEach(produto => {
                         const card = document.createElement('div');
                         card.className = 'product-card';
@@ -342,12 +346,11 @@
                         chatBody.appendChild(card);
                     });
                 } else {
-                    // 3. Não achou na planilha: Gera links dinâmicos para a busca
                     const termoCodificado = encodeURIComponent(termo);
                     
                     const dynamicMagalu = `${baseUrlMagalu}${termoCodificado}/`;
                     const dynamicAmazon = `https://www.amazon.com.br/s?k=${termoCodificado}&tag=${tagAmazon}`;
-                    const dynamicShopee = linkShopee; // Shopee usa link geral
+                    const dynamicShopee = linkShopee; 
                     
                     addMessage(`Não tenho "<b>${termo}</b>" na minha lista separada, mas gerei os atalhos para você pesquisar direto nas lojas oficiais:`, 'bot');
                     
@@ -362,7 +365,7 @@
                     chatBody.appendChild(buttonsContainer);
                 }
                 chatBody.scrollTop = chatBody.scrollHeight;
-            }, 600); // Delay para parecer que está digitando
+            }, 600);
         }
 
         searchInput.addEventListener('input', filterProducts);
